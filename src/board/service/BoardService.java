@@ -23,4 +23,12 @@ public class BoardService {
     	dao.delete(board_id);
     }
 
+	public boolean configureID(int id) {
+		return dao.configureID(id);
+	}
+
+	public int update(int id, String title, String content, String writer) {
+		return dao.update(id,title,content,writer);
+	}
+
 }
