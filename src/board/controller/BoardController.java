@@ -15,6 +15,7 @@ public class BoardController {
             System.out.println("========== 게시판 메뉴 ==========");
             System.out.println("1. 전체 조회");
             System.out.println("2. 글 등록");
+
             System.out.println("0. 종료");
             System.out.print("메뉴 선택 >> ");
 
@@ -23,7 +24,7 @@ public class BoardController {
             switch (menu) {
                 case 1 -> selectAll();
                 case 2 -> insert();
-                case 4 -> update();
+
                 case 0 -> {
                     System.out.println("프로그램을 종료합니다.");
                     return;
@@ -66,5 +67,8 @@ public class BoardController {
         } else {
             System.out.println("등록 실패!");
         }
+    }
+    
+
     }
 }
