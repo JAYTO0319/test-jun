@@ -19,7 +19,7 @@ public class BoardService {
 
 
     
-    public void delete(String board_id) {
+    public void delete(int board_id) {
     	dao.delete(board_id);
     }
 

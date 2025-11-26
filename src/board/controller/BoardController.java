@@ -6,45 +6,34 @@ import board.service.BoardService;
 
 public class BoardController {
 
-    Scanner sc = new Scanner(System.in);
-    BoardService service = new BoardService();
+	Scanner sc = new Scanner(System.in);
+	BoardService service = new BoardService();
 
-    public void start() {
+	public void start() {
 
-        while (true) {
-            System.out.println("========== 게시판 메뉴 ==========");
-            System.out.println("1. 전체 조회");
-            System.out.println("2. 글 등록");
+		while (true) {
+			System.out.println("========== 게시판 메뉴 ==========");
+			System.out.println("1. 전체 조회");
+			System.out.println("2. 글 등록");
+			System.out.println("4. 글 삭제");
+			System.out.println("0. 종료");
+			System.out.print("메뉴 선택 >> ");
 
-            System.out.println("0. 종료");
-            System.out.print("메뉴 선택 >> ");
+			int menu = Integer.parseInt(sc.nextLine());
 
-            int menu = Integer.parseInt(sc.nextLine());
-
-            switch (menu) {
-                case 1 -> selectAll();
-                case 2 -> insert();
-
-                case 0 -> {
-                    System.out.println("프로그램을 종료합니다.");
-                    return;
-                }
-                default -> System.out.println("잘못된 선택입니다.");
-            }
-        }
-    }
-
-    private void update() {
-		System.out.print("수정할 게시물의 ID를 입력하세요: ");
-	    int id = Integer.parseInt(sc.nextLine());
-		    
-	    boolean isExist = service.configureID(id);
-	    if(!isExist) {
-	    	System.out.println("존재하지 않는 ID입니다.");
-	    	return;
-	    }
-	    
+			switch (menu) {
+			case 1 -> selectAll();
+			case 2 -> insert();
+			case 4 -> delete();
+			case 0 -> {
+				System.out.println("프로그램을 종료합니다");
+				return;
+			}
+			default -> System.out.println("잘못된 선택입니다.");
+			}
+		}
 	}
+
 
 	private void selectAll() {
         service.selectAll().forEach(vo -> {
@@ -52,7 +41,7 @@ public class BoardController {
         });
     }
 
-    private void insert() {
+	private void insert() {
         System.out.print("제목: ");
         String title = sc.nextLine();
         System.out.print("내용: ");
@@ -69,6 +58,11 @@ public class BoardController {
         }
     }
     
-
+	private void delete() {
+    	System.out.println("삭제할 글 ID를 입력하세요:");
+    	int boardId = Integer.parseInt(sc.nextLine());
+    	
+    	service.delete(boardId);
+    	
     }
 }
