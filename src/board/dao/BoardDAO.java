@@ -72,5 +72,44 @@ public class BoardDAO {
 		System.out.println("삭제가 완료되었습니다");;
 	}
 
+	public boolean configureID(int id) {
+		String sql = "SELECT 1 FROM board WHERE board_id = ?";
+	    try (Connection conn = DBUtil.getConnection();
+	         PreparedStatement pst = conn.prepareStatement(sql)) {
+
+	    	pst.setInt(1, id);
+	        ResultSet rs = pst.executeQuery();
+
+	        return rs.next(); 
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return false;
+	}
+
+	public int update(int id, String title, String content, String writer) {
+		 String sql = "UPDATE board "
+	               + "SET title = ?, content = ?, writer = ? "
+	               + "WHERE board_id = ?";
+		int result = 0;
+
+		try (Connection conn = DBUtil.getConnection(); PreparedStatement pst = conn.prepareStatement(sql)) {
+
+			pst.setString(1, title);
+			pst.setString(2, content);
+			pst.setString(3, writer);
+			pst.setInt(4, id);
+
+
+			result = pst.executeUpdate();
+
+		} catch (Exception e) {
+			System.out.println("insert 오류: " + e.getMessage());
+		}
+
+		return result;
+	}
+
+
 
 }

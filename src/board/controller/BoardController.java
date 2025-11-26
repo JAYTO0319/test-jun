@@ -15,7 +15,8 @@ public class BoardController {
 			System.out.println("========== 게시판 메뉴 ==========");
 			System.out.println("1. 전체 조회");
 			System.out.println("2. 글 등록");
-			System.out.println("4. 글 삭제");
+			System.out.println("4. 글 수정");
+			System.out.println("5. 글 삭제");
 			System.out.println("0. 종료");
 			System.out.print("메뉴 선택 >> ");
 
@@ -24,7 +25,8 @@ public class BoardController {
 			switch (menu) {
 			case 1 -> selectAll();
 			case 2 -> insert();
-			case 4 -> delete();
+			case 4 -> update();
+			case 5 -> delete();
 			case 0 -> {
 				System.out.println("프로그램을 종료합니다");
 				return;
@@ -33,6 +35,34 @@ public class BoardController {
 			}
 		}
 	}
+
+
+	 private void update() {
+			System.out.print("수정할 게시물의 ID를 입력하세요: ");
+		    int id = Integer.parseInt(sc.nextLine());
+			    
+		    boolean isExist = service.configureID(id);
+		    if(!isExist) {
+		    	System.out.println("존재하지 않는 ID입니다.");
+		    	return;
+		    }
+		    System.out.print("제목: ");
+	        String title = sc.nextLine();
+	        System.out.print("내용: ");
+	        String content = sc.nextLine();
+	        System.out.print("작성자: ");
+	        String writer = sc.nextLine();
+
+	        int result = service.update(id, title, content, writer);
+
+	        if (result > 0) {
+	            System.out.println("수정 성공!");
+	        } else {
+	            System.out.println("수정 실패!");
+	        }
+		    
+		    
+		}
 
 
 	private void selectAll() {
