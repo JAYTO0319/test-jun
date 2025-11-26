@@ -16,9 +16,4 @@ public class BoardService {
     public int insert(String title, String content, String writer) {
         return dao.insert(title, content, writer);
     }
-
-	public List<BoardVO> detailSelect(String title) {
-		return dao.detailSelect(title);
-		
-	}
 }
