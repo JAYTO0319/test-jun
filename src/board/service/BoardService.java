@@ -16,4 +16,8 @@ public class BoardService {
     public int insert(String title, String content, String writer) {
         return dao.insert(title, content, writer);
     }
+    
+    public void delete(String board_id) {
+    	dao.delete(board_id);
+    }
 }

@@ -15,6 +15,7 @@ public class BoardController {
             System.out.println("========== 게시판 메뉴 ==========");
             System.out.println("1. 전체 조회");
             System.out.println("2. 글 등록");
+            System.out.println("5. 글 삭제");
             System.out.println("0. 종료");
             System.out.print("메뉴 선택 >> ");
 
@@ -23,6 +24,7 @@ public class BoardController {
             switch (menu) {
                 case 1 -> selectAll();
                 case 2 -> insert();
+                case 5 -> delete();
                 case 0 -> {
                     System.out.println("프로그램을 종료합니다.");
                     return;
@@ -53,5 +55,14 @@ public class BoardController {
         } else {
             System.out.println("등록 실패!");
         }
+    }
+    
+    private void delete() {
+    	System.out.println("게시물의 id를 입력하세요:");
+    	String boardId = sc.nextLine();
+    	
+    	service.delete(boardId);
+    	
+    	
     }
 }
