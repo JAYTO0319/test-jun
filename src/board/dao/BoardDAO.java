@@ -55,29 +55,21 @@ public class BoardDAO {
 		return result;
 	}
 
-	public List<BoardVO> detailSelect(String title) {
-		List<BoardVO> list = new ArrayList<>();
-		String sql = "SELECT * FROM board ORDER BY board_id DESC";
-		
-		try (Connection conn = DBUtil.getConnection();
-			PreparedStatement pst = conn.prepareStatement(sql);
-			ResultSet rs = pst.executeQuery()) {
-			pst.setString(1, "%" + title + "%");
-			while (rs.next()) {
-				BoardVO vo = new BoardVO();
-				vo.setBoardId(rs.getInt("board_id"));
-				vo.setTitle(rs.getString("title"));
-				vo.setContent(rs.getString("content"));
-				vo.setWriter(rs.getString("writer"));
-				vo.setWriteDate(rs.getDate("write_date"));
-				list.add(vo);
-			}
+	public void delete(int boardId) {
+		String sql = "delete from board where board_id = ? ";
+		int result = 0;
+
+		try (Connection conn = DBUtil.getConnection(); PreparedStatement pst = conn.prepareStatement(sql)) {
+
+			pst.setInt(1, boardId);
+			
+			result = pst.executeUpdate();
 
 		} catch (Exception e) {
-			System.out.println("selectAll 오류: " + e.getMessage());
+			System.out.println("insert 오류: " + e.getMessage());
 		}
 
-		return list;
+		System.out.println("삭제가 완료되었습니다");;
 	}
 
 
