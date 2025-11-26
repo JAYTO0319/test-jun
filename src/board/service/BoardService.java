@@ -16,4 +16,9 @@ public class BoardService {
     public int insert(String title, String content, String writer) {
         return dao.insert(title, content, writer);
     }
+
+	public boolean configureID(int id) {
+		return dao.configureID(id);
+	}
+
 }

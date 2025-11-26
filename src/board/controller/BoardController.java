@@ -23,6 +23,7 @@ public class BoardController {
             switch (menu) {
                 case 1 -> selectAll();
                 case 2 -> insert();
+                case 4 -> update();
                 case 0 -> {
                     System.out.println("프로그램을 종료합니다.");
                     return;
@@ -32,7 +33,19 @@ public class BoardController {
         }
     }
 
-    private void selectAll() {
+    private void update() {
+		System.out.print("수정할 게시물의 ID를 입력하세요: ");
+	    int id = Integer.parseInt(sc.nextLine());
+		    
+	    boolean isExist = service.configureID(id);
+	    if(!isExist) {
+	    	System.out.println("존재하지 않는 ID입니다.");
+	    	return;
+	    }
+	    
+	}
+
+	private void selectAll() {
         service.selectAll().forEach(vo -> {
             System.out.println(vo);
         });

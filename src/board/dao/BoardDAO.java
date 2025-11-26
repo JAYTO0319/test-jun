@@ -53,4 +53,19 @@ public class BoardDAO {
 
         return result;
     }
+
+	public boolean configureID(int id) {
+		 String sql = "SELECT 1 FROM users WHERE id = ?";
+	    try (Connection conn = DBUtil.getConnection();
+	         PreparedStatement pst = conn.prepareStatement(sql)) {
+
+	    	pst.setInt(1, id);
+	        ResultSet rs = pst.executeQuery();
+
+	        return rs.next(); 
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return false;
+	}
 }
