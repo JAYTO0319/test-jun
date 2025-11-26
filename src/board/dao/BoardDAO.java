@@ -80,4 +80,29 @@ public class BoardDAO {
 		return list;
 	}
 
+<<<<<<< HEAD
+=======
+        return result;
+    }
+    
+    public void delete(String board_id) {
+    	String sql = "delete from board where board_id = ?";
+    	int result = 0;
+
+        try (Connection conn = DBUtil.getConnection();
+             PreparedStatement pst = conn.prepareStatement(sql)) {
+
+            pst.setString(1, board_id);
+           
+            result = pst.executeUpdate();
+            
+
+        } catch (Exception e) {
+            System.out.println("delete 오류: " + e.getMessage());
+        }
+
+        System.out.println("삭제가 완료되었습니다.");
+    	
+    }
+>>>>>>> develop
 }
