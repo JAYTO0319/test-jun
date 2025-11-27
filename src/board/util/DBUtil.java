@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 
 public class DBUtil {
 
-    private static final String URL = "jdbc:oracle:thin:@192.168.0.70:1521:xe";
+    private static final String URL = "jdbc:oracle:thin:@192.168.0.74:1521:xe";
     private static final String USER = "tp";
     private static final String PASSWORD = "teamproject";
 
