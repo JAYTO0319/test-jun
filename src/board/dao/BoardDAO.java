@@ -110,35 +110,31 @@ public class BoardDAO {
 		return result;
 	}
 
-	public BoardVO selectById(int boardId) {
-        String sql = "SELECT board_id, title, content, writer, write_date " +
-                     "FROM board " +
-                     "WHERE board_id = ?";
+	public BoardVO detailSelect(int id) {
+		String sql = "SELECT * FROM board WHERE board_id = ?";
+	    BoardVO vo = null;
 
-        BoardVO vo = null;
+	    try (Connection conn = DBUtil.getConnection();
+	         PreparedStatement pst = conn.prepareStatement(sql)) {
 
-        try (Connection conn = DBUtil.getConnection();
-             PreparedStatement pst = conn.prepareStatement(sql)) {
+	        pst.setInt(1, id);
+	        ResultSet rs = pst.executeQuery();
 
-            pst.setInt(1, boardId);
+	        if (rs.next()) {
+	            vo = new BoardVO();
+	            vo.setBoardId(rs.getInt("board_id"));
+	            vo.setTitle(rs.getString("title"));
+	            vo.setContent(rs.getString("content"));
+	            vo.setWriter(rs.getString("writer"));
+	            vo.setWriteDate(rs.getDate("write_date"));
+	        }
 
-            try (ResultSet rs = pst.executeQuery()) {
-                if (rs.next()) {
-                    vo = new BoardVO();
-                    vo.setBoardId(rs.getInt("board_id"));
-                    vo.setTitle(rs.getString("title"));
-                    vo.setContent(rs.getString("content"));
-                    vo.setWriter(rs.getString("writer"));
-                    vo.setWriteDate(rs.getDate("write_date"));
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("selectById 오류: " + e.getMessage());
-        }
+	    } catch (Exception e) {
+	        System.out.println("detailSelectById 오류: " + e.getMessage());
+	    }
 
-        return vo; // 없으면 null
-    }
-
+	    return vo;
+	}
 
 
 }

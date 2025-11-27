@@ -100,23 +100,21 @@ public class BoardController {
     }
 	
 	private void detailSelect() {
-        System.out.print("상세 조회할 글 ID를 입력하세요: ");
-        int boardId = Integer.parseInt(sc.nextLine());
+		System.out.print("조회할 게시물의 ID를 입력하세요: ");
+		int id = Integer.parseInt(sc.nextLine());
 
-        BoardVO vo = service.detailSelect(boardId);
+		BoardVO vo = service.detailSelect(id);
 
-        if (vo == null) {
-            System.out.println("해당 ID의 게시글이 존재하지 않습니다.");
-            return;
-        }
+		if (vo == null) {
+			System.out.println("해당 ID의 게시물이 존재하지 않습니다.");
+			return;
+		}
 
-        System.out.println("========== 글 상세 조회 ==========");
-        System.out.println("ID    : " + vo.getBoardId());
-        System.out.println("제목  : " + vo.getTitle());
-        System.out.println("작성자: " + vo.getWriter());
-        System.out.println("작성일: " + vo.getWriteDate());
-        System.out.println("내용  : ");
-        System.out.println(vo.getContent());
-        System.out.println("==================================");
-    }
+		System.out.println("===== 게시글 상세 =====");
+		System.out.println("ID: " + vo.getBoardId());
+		System.out.println("제목: " + vo.getTitle());
+		System.out.println("작성자: " + vo.getWriter());
+		System.out.println("작성일: " + vo.getWriteDate());
+		System.out.println("내용: " + vo.getContent());
+	}
 }
