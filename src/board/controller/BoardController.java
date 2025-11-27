@@ -15,6 +15,7 @@ public class BoardController {
 			System.out.println("========== 게시판 메뉴 ==========");
 			System.out.println("1. 전체 조회");
 			System.out.println("2. 글 등록");
+			System.out.println("3. 글 상세 조회");
 			System.out.println("4. 글 수정");
 			System.out.println("5. 글 삭제");
 			System.out.println("0. 종료");
@@ -25,6 +26,7 @@ public class BoardController {
 			switch (menu) {
 			case 1 -> selectAll();
 			case 2 -> insert();
+			case 3 -> detailSelect();
 			case 4 -> update();
 			case 5 -> delete();
 			case 0 -> {
@@ -95,4 +97,12 @@ public class BoardController {
     	service.delete(boardId);
     	
     }
+	
+	private void detailSelect() {
+    	System.out.print("제목: ");
+        sc.nextLine();
+        service.selectAll().forEach(vo -> {
+            System.out.println(vo);
+        });
+	}
 }

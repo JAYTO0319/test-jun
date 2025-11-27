@@ -30,5 +30,10 @@ public class BoardService {
 	public int update(int id, String title, String content, String writer) {
 		return dao.update(id,title,content,writer);
 	}
+	
+	public List<BoardVO> detailSelect(String title) {
+		return dao.detailSelect(title);
+		
+	}
 
 }
