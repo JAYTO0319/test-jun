@@ -3,6 +3,7 @@ package board.controller;
 import java.util.Scanner;
 
 import board.service.BoardService;
+import board.vo.BoardVO;
 
 public class BoardController {
 
@@ -99,10 +100,21 @@ public class BoardController {
     }
 	
 	private void detailSelect() {
-    	System.out.print("제목: ");
-        sc.nextLine();
-        service.selectAll().forEach(vo -> {
-            System.out.println(vo);
-        });
+		System.out.print("조회할 게시물의 ID를 입력하세요: ");
+		int id = Integer.parseInt(sc.nextLine());
+
+		BoardVO vo = service.detailSelect(id);
+
+		if (vo == null) {
+			System.out.println("해당 ID의 게시물이 존재하지 않습니다.");
+			return;
+		}
+
+		System.out.println("===== 게시글 상세 =====");
+		System.out.println("ID: " + vo.getBoardId());
+		System.out.println("제목: " + vo.getTitle());
+		System.out.println("작성자: " + vo.getWriter());
+		System.out.println("작성일: " + vo.getWriteDate());
+		System.out.println("내용: " + vo.getContent());
 	}
 }
