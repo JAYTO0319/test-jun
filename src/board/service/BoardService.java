@@ -31,9 +31,8 @@ public class BoardService {
 		return dao.update(id,title,content,writer);
 	}
 	
-	public List<BoardVO> detailSelect(String title) {
-		return dao.detailSelect(title);
-		
+	public BoardVO detailSelect(int id) {
+		return dao.detailSelect(id);
 	}
 
 }
